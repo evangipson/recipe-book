@@ -1,23 +1,49 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import firebase from 'firebase'
+import Recipes from './views/Recipes.vue';
+import Login from './views/Login.vue';
+import SignUp from './views/Signup.vue';
 
 Vue.use(Router);
 
-export default new Router({
+/* Main site map */
+let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      name: 'Login',
+      component: Login
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
+    },
+    {
+      path: '/recipes',
+      name: 'Recipes',
+      component: Recipes,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ],
 });
+
+/* Check on user's authentication in between routes */
+router.beforeEach((to, from, next) => {
+  let currentUser = firebase.auth().currentUser
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+
+  if (requiresAuth && !currentUser) next('login')
+  else if (!requiresAuth && currentUser) next('recipes')
+  else next()
+});
+
+export default router;
