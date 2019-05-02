@@ -27,5 +27,15 @@ export const db = firebase.firestore();
 new Vue({
   router,
   store,
+  /* make authentication persist */
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.$router.push('/recipes')
+      } else {
+        this.$router.push('/login')
+      }
+    });
+  },
   render: (h) => h(App),
 }).$mount('#app');

@@ -7,11 +7,20 @@
                 <p>{{recipe.name}}</p>
             </div>
         </article>
-        <form @submit="addRecipe(name, image)">
-            <h2>Add a new recipe</h2>
-            <input v-model="name" placeholder="Recipe Name" class="input" required>
-            <input v-model="image" placeholder="Recipe Image URL" class="input" required>
-            <button type="submit" class="button">Add New Recipe</button>
+        <form @submit="addRecipe(name, image)" class="notecard">
+            <h3 class="mb-4">Add a new recipe</h3>
+            <div class="mb-4">
+                <label class="label" for="Name">Recipe Name</label>
+                <input class="input focus:outline-none focus:shadow-outline" v-model="name" type="input" placeholder="Recipe Name" required>
+            </div>
+            <div class="mb-6">
+                <label class="label" for="Image">Recipe Image URL</label>
+                <input v-model="image" type="input" class="input" placeholder="Recipe Image URL" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="button">Add New Recipe</button>
+                <button class="button" @click="logout">Logout</button>
+            </div>
         </form>
     </div>
 </template>
@@ -48,7 +57,7 @@ export default {
     },
     logout () {
       firebase.auth().signOut().then(() => {
-        this.$router.replace('login');
+        this.$router.replace('/login');
       })
     }
   }
