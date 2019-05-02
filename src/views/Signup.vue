@@ -1,9 +1,9 @@
 <template>
-  <div class="notecard signup">
+  <form class="notecard signup" @submit="signUp">
     <h3 class="mb-4">Create a new account</h3>
       <div class="mb-4">
         <label class="label" for="Email">Email</label>
-        <input class="input focus:outline-none focus:shadow-outline" v-model="email" type="text" placeholder="Email" required>
+        <input class="input focus:outline-none focus:shadow-outline" v-model="email" type="email" placeholder="Email" required>
       </div>
       <div class="mb-6">
         <label class="label" for="Password">Password</label>
@@ -15,7 +15,7 @@
           <router-link to="/login">Already have an Account? Back to login</router-link>
         </p>
       </div>
-  </div>
+  </form>
 </template>
 
 <script>

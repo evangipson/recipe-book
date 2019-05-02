@@ -1,5 +1,6 @@
 <template>
     <div class="recipes">
+        <p class="mb-4">Welcome, {{email}}!</p>
         <article class="recipe-covers" v-for="(recipe, idx) in recipes" :key="idx">
             <div>
                 <img :src="recipe.image" />
@@ -25,12 +26,13 @@ export default {
     return {
       recipes: [],
       name: '',
-      image: ''
+      image: '',
+      email: firebase.auth().currentUser.email
     };
   },
   firestore () {
     return {
-      recipes: db.collection('recipes').orderBy('createdAt')
+      recipes: db.collection('recipes').orderBy('createdAt'),
     };
   },
   methods: {
