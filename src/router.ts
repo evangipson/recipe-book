@@ -36,7 +36,7 @@ let router = new Router({
       }
     },
     {
-      path: '/recipes/:recipe',
+      path: '/recipe/:recipe',
       name: 'Recipe',
       component: Recipe,
       meta: {
