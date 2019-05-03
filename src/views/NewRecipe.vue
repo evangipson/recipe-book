@@ -78,6 +78,8 @@ export default {
       this.cookTime = 0;
       this.ingredients = '';
       this.instructions = '';
+      // Now reroute the user to the recipes page
+      this.$router.replace('/recipes');
     },
     deleteRecipe (id) {
       db.collection('recipes').doc(id).delete();

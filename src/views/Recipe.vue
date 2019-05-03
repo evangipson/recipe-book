@@ -8,7 +8,6 @@
         <p>Cook time: {{recipe.cookTime}}</p>
         <p>Ingredients: {{recipe.ingredients}}</p>
         <p>Instructions: {{recipe.instructions}}</p>
-        <p class="mb-4">Welcome, {{email}}! Here is your {{recipe.name}} recipe.</p>
     </div>
 </template>
 
