@@ -2,7 +2,9 @@
     <div class="recipes notecard flex flex-row align-middle justify-between">
         <div class="mr-8">
             <h1>{{recipe.name}}</h1>
-            <p class="text-dark-grey italic mb-4">{{recipe.description}}</p>
+            <p class="mb-4">{{recipe.description}}</p>
+            <p class="mb-4">{{recipeTypes(recipe.types)}}</p>
+            <p class="mb-4">Author: {{recipe.author}}</p>
             <p>Prep time: {{recipe.prepTime}} minutes</p>
             <p>Cook time: {{recipe.cookTime}} minutes</p>
             <p class="mb-4">Total time: {{totalTime}} minutes</p>
@@ -24,27 +26,38 @@ import firebase from 'firebase';
 import { db } from '../main';
 
 export default {
-  name: 'Recipe',
-  data () {
-    return {
-      recipe: ''
-    };
-  },
-  computed: {
-    instructions: function() {
-        return this.recipe.instructions.split(/\n/)
+    name: 'Recipe',
+    data () {
+        return {
+            recipe: ''
+        };
     },
-    ingredients: function() {
-        return this.recipe.ingredients.split(/\n/)
+    methods: {
+        recipeTypes: function(types) {
+            var returnArray = [];
+            for(var type in types) {
+                if(types[type]) {
+                    returnArray.push(type.charAt(0).toUpperCase() + type.slice(1));
+                }
+            };
+            return returnArray.join(", ");
+        }
     },
-    totalTime: function() {
-        return parseInt(this.recipe.prepTime) + parseInt(this.recipe.cookTime)
+    computed: {
+        instructions: function() {
+            return this.recipe.instructions.split(/\n/)
+        },
+        ingredients: function() {
+            return this.recipe.ingredients.split(/\n/)
+        },
+        totalTime: function() {
+            return parseInt(this.recipe.prepTime) + parseInt(this.recipe.cookTime)
+        }
+    },
+    firestore() {
+        return {
+            recipe: db.collection('recipes').doc(this.$route.params.recipe.replace(/-+/g, ' ').toLowerCase())
+        }
     }
-  },
-  firestore() {
-    return {
-        recipe: db.collection('recipes').doc(this.$route.params.recipe.replace(/-+/g, ' ').toLowerCase())
-    }
-  }
 }
 </script>
