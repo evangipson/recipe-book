@@ -11,6 +11,7 @@ Vue.use(Router);
 
 /* Main site map */
 let router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
