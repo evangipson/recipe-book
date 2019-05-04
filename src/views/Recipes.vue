@@ -7,12 +7,14 @@
         </form>
         <router-link to="/new-recipe"><button class="button mb-4">Create new Recipe</button></router-link>
         <button class="button mb-4 block" @click="logout">Logout</button>
-        <div class=" flex flex-row">
+        <div class="flex flex-row flex-wrap">
             <article class="recipe-covers" v-for="(recipe, idx) in filteredRecipes" :key="idx">
-                <div class="recipe-card mr-4">
-                    <img :src="recipe.image" />
-                    <p><router-link :to="{ path: '/recipe/' + recipe.name.toLowerCase(), params: {recipe: recipe.name}}">{{recipe.name}}</router-link></p>
-                </div>
+                <router-link :to="{ path: '/recipe/' + recipe.name.replace(/\s+/g, '-').toLowerCase()}">
+                    <div class="recipe-card mr-8 mb-8">
+                        <img :src="recipe.image" />
+                        <p>{{recipe.name}}</p>
+                    </div>
+                </router-link>
             </article>
         </div>
     </div>
