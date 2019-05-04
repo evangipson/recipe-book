@@ -3,7 +3,7 @@
         <div class="mr-8">
             <h1>{{recipe.name}}</h1>
             <p class="mb-4">{{recipe.description}}</p>
-            <p class="mb-4">{{recipeTypes(recipe.types)}}</p>
+            <p class="mb-4 text-grey-dark italic">{{recipeTypes(recipe.types)}}</p>
             <p class="mb-4">Author: {{recipe.author}}</p>
             <p>Prep time: {{recipe.prepTime}} minutes</p>
             <p>Cook time: {{recipe.cookTime}} minutes</p>

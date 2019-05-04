@@ -29,14 +29,6 @@ firebase.auth().onAuthStateChanged(function (user) {
   new Vue({
     router,
     store,
-    /* make authentication persist */
-    created() {
-      if(user) {
-        // just let the user pick their own route
-      } else {
-        this.$router.push('/login')
-      }
-    },
     render: (h) => h(App),
   }).$mount('#app');
 });
