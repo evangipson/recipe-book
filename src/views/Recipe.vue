@@ -1,15 +1,21 @@
 <template>
-    <div class="recipes">
-        <p class="mb-4">Welcome, {{email}}! Here is your {{recipe.name}} recipe.</p>
-        <p class="mb-4">Not what you were looking for? Go back to the <router-link to="/recipes">Recipes page</router-link>.</p>
-        <h2>{{recipe.name}}</h2>
-        <p>{{recipe.description}}</p>
-        <img :src="recipe.image" />
-        <p>Prep time: {{recipe.prepTime}}</p>
-        <p>Cook time: {{recipe.cookTime}}</p>
-        <p>Ingredients: {{recipe.ingredients}}</p>
-        <p>Instructions: {{recipe.instructions}}</p>
-        <p>$route.params.recipe: {{this.$route.params.recipe}}</p>
+    <div class="recipes notecard flex flex-row align-middle justify-between">
+        <div class="mr-8">
+            <h1>{{recipe.name}}</h1>
+            <p class="text-dark-grey italic mb-4">{{recipe.description}}</p>
+            <p>Prep time: {{recipe.prepTime}} minutes</p>
+            <p>Cook time: {{recipe.cookTime}} minutes</p>
+            <p class="mb-4">Total time: {{totalTime}} minutes</p>
+            <p>Ingredients:</p>
+            <ul class="mb-4">
+                <li v-for="(ingredient, idx) in ingredients" :key="idx">{{ingredient}}</li>
+            </ul>
+            <p>Instructions:</p>
+            <ol>
+                <li v-for="(instruction, idx) in instructions" :key="idx">{{instruction}}</li>
+            </ol>
+        </div>
+        <img style="width:450px;height:100%" :src="recipe.image" />
     </div>
 </template>
 
@@ -21,9 +27,19 @@ export default {
   name: 'Recipe',
   data () {
     return {
-      recipe: '',
-      email: firebase.auth().currentUser.email
+      recipe: ''
     };
+  },
+  computed: {
+    instructions: function() {
+        return this.recipe.instructions.split(/\n/)
+    },
+    ingredients: function() {
+        return this.recipe.ingredients.split(/\n/)
+    },
+    totalTime: function() {
+        return parseInt(this.recipe.prepTime) + parseInt(this.recipe.cookTime)
+    }
   },
   firestore() {
     return {

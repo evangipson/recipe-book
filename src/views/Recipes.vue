@@ -1,12 +1,9 @@
 <template>
     <div class="recipes">
-        <p class="mb-4">Welcome, {{email}}! Here are all the recipes.</p>
         <form class="mb-4">
             <label class="label" for="search">Search recipes</label>
-            <input class="input mb-4" type="text" v-model="search" placeholder="Search recipes..." />
+            <input class="input mb-4 border-l-0 border-r-0 border-t-0" type="text" v-model="search" placeholder="Search recipes..." />
         </form>
-        <router-link to="/new-recipe"><button class="button mb-4">Create new Recipe</button></router-link>
-        <button class="button mb-4 block" @click="logout">Logout</button>
         <div class="flex flex-row flex-wrap">
             <article class="recipe-covers" v-for="(recipe, idx) in filteredRecipes" :key="idx">
                 <router-link :to="{ path: '/recipe/' + recipe.name.replace(/\s+/g, '-').toLowerCase()}">
@@ -30,7 +27,6 @@ export default {
     return {
       recipes: [],
       search: '',
-      email: firebase.auth().currentUser.email
     };
   },
   firestore () {
@@ -54,13 +50,6 @@ export default {
         });
       
         return result;
-    }
-  },
-  methods: {
-    logout () {
-      firebase.auth().signOut().then(() => {
-        this.$router.replace('/login');
-      })
     }
   }
 }

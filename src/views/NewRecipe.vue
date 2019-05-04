@@ -1,6 +1,5 @@
 <template>
     <div>
-        <p class="mb-4">Not what you were looking for? Go back to the <router-link to="/recipes">Recipes page</router-link>.</p>
         <form @submit="addRecipe(name, image)" class="notecard">
             <h3 class="mb-4">Add a new recipe</h3>
             <div class="mb-4">

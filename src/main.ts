@@ -24,18 +24,19 @@ firebase.initializeApp(config);
 /* Define Firebase for the rest of the application */
 export const db = firebase.firestore();
 
-new Vue({
-  router,
-  store,
-  /* make authentication persist */
-  created() {
-    firebase.auth().onAuthStateChanged((user) => {
+/* Ensure the user's authentication is handled before we show the app */
+firebase.auth().onAuthStateChanged(function (user) {
+  new Vue({
+    router,
+    store,
+    /* make authentication persist */
+    created() {
       if(user) {
-        this.$router.push('/recipes')
+        // just let the user pick their own route
       } else {
         this.$router.push('/login')
       }
-    });
-  },
-  render: (h) => h(App),
-}).$mount('#app');
+    },
+    render: (h) => h(App),
+  }).$mount('#app');
+});
