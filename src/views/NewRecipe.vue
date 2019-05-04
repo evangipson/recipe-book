@@ -137,7 +137,7 @@ export default {
         author: this.email
       });
       // Now reroute the user to the recipes page
-      this.$router.replace('/recipes');
+      this.$router.replace('/');
     },
     deleteRecipe (id) {
       db.collection('recipes').doc(id).delete();

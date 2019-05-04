@@ -15,8 +15,11 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Login',
-      component: Login
+      name: 'Recipes',
+      component: Recipes,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/login',
@@ -27,14 +30,6 @@ let router = new Router({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
-    },
-    {
-      path: '/recipes',
-      name: 'Recipes',
-      component: Recipes,
-      meta: {
-        requiresAuth: true
-      }
     },
     {
       path: '/recipe/:recipe',

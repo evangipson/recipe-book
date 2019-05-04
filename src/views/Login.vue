@@ -35,7 +35,7 @@
     methods: {
       login () {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user) => {
-          this.$router.replace('/recipes');
+          this.$router.replace('/');
         }).catch((err) => {
           console.error(err.message);
           /* if we have both fields and they are valid */
