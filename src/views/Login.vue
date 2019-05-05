@@ -1,5 +1,5 @@
 <template>
-  <form class="notecard login" @submit="login">
+  <form class="notecard login">
     <h3 class="mb-4">Login</h3>
     <p class="mb-4 text-red" v-if="error">
       {{ error }}
@@ -13,7 +13,7 @@
       <input v-model="password" type="password" class="input" placeholder="Password" required>
     </div>
     <div class="flex items-center justify-between">
-      <button type="submit" class="button">Enter</button>
+      <button type="submit" @click="login" class="button">Enter</button>
       <p>
         <router-link to="/signup">New Here? Create a new account</router-link>
       </p>
