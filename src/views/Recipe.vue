@@ -1,5 +1,5 @@
 <template>
-    <div class="recipes notecard flex flex-row align-middle justify-between">
+    <div class="recipes notecard flex flex-column-reverse align-middle justify-between lg:flex-row">
         <div class="mr-8">
             <h1>{{recipe.name}}</h1>
             <p class="mb-4">{{recipe.description}}</p>
