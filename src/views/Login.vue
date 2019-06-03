@@ -1,5 +1,5 @@
 <template>
-  <form class="notecard login">
+  <form class="notecard login" @submit="login()" >
     <h3 class="mb-4">Login</h3>
     <p class="mb-4 text-red" v-if="error">
       {{ error }}
@@ -13,11 +13,12 @@
       <input v-model="password" type="password" class="input" placeholder="Password" required>
     </div>
     <div class="flex items-center justify-between">
-      <button type="submit" @click="login" class="button">Enter</button>
+      <button type="submit" class="button">Enter</button>
       <p>
         <router-link to="/signup">New Here? Create a new account</router-link>
       </p>
     </div>
+    <p>{{this.$store.state.currentUser}}</p>
   </form>
 </template>
 
@@ -35,6 +36,7 @@
     methods: {
       login () {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user) => {
+          this.$store.commit("setCurrentUser", user);
           this.$router.replace('/');
         }).catch((err) => {
           console.error(err.message);

@@ -9,9 +9,11 @@
                 <router-link :to="{ path: '/recipe/' + recipe.name.replace(/\s+/g, '-').toLowerCase()}" class="no-underline text-black">
                     <div class="recipe-card mr-8 mb-8">
                         <img style="width: 100%" :src="recipe.image" />
-                        <p style="font-size:24px" class="font-semibold underline">{{recipe.name}}</p>
-                        <p class="mb-4">{{recipe.description}}</p>
-                        <p class="text-grey-dark italic">{{recipeTypes(recipe.types)}}</p>
+                        <div class="px-4 pb-4 pt-2">
+                            <p style="font-size:24px" class="font-semibold underline">{{recipe.name}}</p>
+                            <p class="mb-4">{{recipe.description}}</p>
+                            <p class="text-grey-dark italic">{{recipeTypes(recipe.types)}}</p>
+                        </div>
                     </div>
                 </router-link>
             </article>

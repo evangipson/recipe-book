@@ -25,14 +25,15 @@ import firebase from 'firebase';
 
 export default {
     name: "Navigation",
-    data() {
-        return {
-            user: firebase.auth().currentUser
+    computed: {
+        user() {
+            return this.$store.state.currentUser;
         }
     },
     methods: {
         logout() {
             firebase.auth().signOut().then(() => {
+                store.commit("setCurrentUser", null);
                 this.$router.replace('/login');
             })
         },

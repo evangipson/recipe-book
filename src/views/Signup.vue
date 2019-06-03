@@ -31,6 +31,7 @@
     methods: {
       signUp () {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user) => {
+          this.$store.commit("setCurrentUser", user);
           this.$router.replace('/login');
         }).catch((err) => {
           console.error(err.message);
