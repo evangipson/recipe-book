@@ -18,7 +18,7 @@
             </ol>
             <button @click="deleteRecipe" class="button mt-8">Delete Recipe</button>
         </div>
-        <img style="width:450px;height:100%" :src="recipe.image" />
+        <img style="margin: 0 auto 2rem;width: 450px;object-fit: contain;height: 100%;" :src="recipe.image" />
     </div>
 </template>
 
