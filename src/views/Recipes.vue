@@ -11,7 +11,7 @@
                         <img style="width: 100%" :src="recipe.image" />
                         <div class="px-4 pb-4 pt-2">
                             <p style="font-size:24px" class="font-semibold underline">{{recipe.name}}</p>
-                            <p class="mb-4">{{recipe.description}}</p>
+                            <p class="mb-4">{{limitDescription(recipe.description)}}</p>
                             <p class="text-grey-dark italic">{{recipeTypes(recipe.types)}}</p>
                         </div>
                     </div>
@@ -65,6 +65,13 @@ export default {
                 }
             };
             return returnArray.join(", ");
+        },
+        limitDescription: function(description) {
+            if (description.length <= 140) { return description; }
+            var subString = description.substr(0, 139);
+            return (20
+                ? subString.substr(0, subString.lastIndexOf(' '))
+                : subString) + "...";
         }
     }
 }
