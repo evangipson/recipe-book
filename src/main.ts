@@ -6,6 +6,7 @@ import './assets/tailwind.pcss';
 import { firestorePlugin } from 'vuefire';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore'
+import firebaseConfig from './config/config';
 
 Vue.config.productionTip = false;
 Vue.use(firestorePlugin);
@@ -14,14 +15,7 @@ Vue.use(firestorePlugin);
 let app;
 
 // Initialize Firebase
-firebase.initializeApp({
-  apiKey: "AIzaSyBVx2JURCDI4urzJMtaXMHedHWgpcsmjQU",
-  authDomain: "recipebook-99f2e.firebaseapp.com",
-  databaseURL: "https://recipebook-99f2e.firebaseio.com",
-  projectId: "recipebook-99f2e",
-  storageBucket: "recipebook-99f2e.appspot.com",
-  messagingSenderId: "1023982856739"
-});
+firebase.initializeApp(firebaseConfig);
 
 /* Define Firebase for the rest of the application */
 export const db = firebase.firestore();
