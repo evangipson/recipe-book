@@ -7,7 +7,7 @@ Recipe Book is a way to keep your recipes organized, with search included.
 | [Contributing](#contributing) |
 
 # Built With
-* [Vue](hhttps://vuejs.org/)
+* [Vue](https://vuejs.org/)
 * [TypeScript](https://www.typescriptlang.org/)
 * [Tailwind](https://tailwindcss.com/)
 * [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
