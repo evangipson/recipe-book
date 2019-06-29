@@ -16,8 +16,10 @@
             <ol>
                 <li v-for="(instruction, idx) in recipe.instructions.split(/\n/)" :key="idx">{{instruction}}</li>
             </ol>
-            <button @click="deleteRecipe" class="button mt-8 mr-8">Delete Recipe</button>
-            <router-link :to="{ path: '/edit/' + recipe.name.replace(/\s+/g, '-').toLowerCase()}"><button class="button mt-8">Edit Recipe</button></router-link>
+            <div class="mt-8" v-if="userMatchesAuthor">
+                <router-link :to="{ path: '/edit/' + recipe.name.replace(/\s+/g, '-').toLowerCase()}"><button class="button mr-8">Edit Recipe</button></router-link>
+                <button @click="deleteRecipe" class="button bg-red">Delete Recipe</button>
+            </div>
         </div>
         <img style="margin: 0 auto 2rem;width: 450px;object-fit: contain;height: 100%;" :src="recipe.image" />
     </div>
@@ -47,7 +49,7 @@ export default {
             });
             /* after the user deletes the recipe, relocate them to the main page */
             this.$router.replace('/');
-        },
+        }
     },
     computed: {
         totalTime: function() {
@@ -62,6 +64,13 @@ export default {
             };
             return returnArray.join(", ");
         },
+        userMatchesAuthor: function() {
+            console.log(this.recipe.author);
+            if(firebase.auth().currentUser.email === this.recipe.author) {
+                return true;
+            }
+            return false;
+        }
     },
     firestore() {
         return {
