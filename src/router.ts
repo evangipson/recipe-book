@@ -5,6 +5,7 @@ import store from "./store";
 import Recipes from './views/Recipes.vue';
 import Recipe from './views/Recipe.vue';
 import NewRecipe from './views/NewRecipe.vue';
+import EditRecipe from './views/EditRecipe.vue';
 import Login from './views/Login.vue';
 import SignUp from './views/Signup.vue';
 
@@ -41,6 +42,14 @@ let router = new Router({
       path: '/new-recipe',
       name: 'NewRecipe',
       component: NewRecipe,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/edit/:recipe',
+      name: 'EditRecipe',
+      component: EditRecipe,
       meta: {
         requiresAuth: true
       }

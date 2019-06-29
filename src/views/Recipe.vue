@@ -16,7 +16,8 @@
             <ol>
                 <li v-for="(instruction, idx) in recipe.instructions.split(/\n/)" :key="idx">{{instruction}}</li>
             </ol>
-            <button @click="deleteRecipe" class="button mt-8">Delete Recipe</button>
+            <button @click="deleteRecipe" class="button mt-8 mr-8">Delete Recipe</button>
+            <router-link :to="{ path: '/edit/' + recipe.name.replace(/\s+/g, '-').toLowerCase()}"><button class="button mt-8">Edit Recipe</button></router-link>
         </div>
         <img style="margin: 0 auto 2rem;width: 450px;object-fit: contain;height: 100%;" :src="recipe.image" />
     </div>
