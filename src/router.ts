@@ -52,7 +52,6 @@ let router = new Router({
       component: EditRecipe,
       meta: {
         requiresAuth: true,
-        requiresAuthorMatchup: true,
       }
     }
   ],
@@ -60,18 +59,12 @@ let router = new Router({
 
 /* Check on user's authentication in between routes */
 router.beforeEach((to, from, next) => {
-  let requiresMatchup = to.matched.some(record => record.meta.requiresAuthorMatchup);
   let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   // page requires authentication but user isn't signed in,
   // so take them to the log in page
   if (requiresAuth && !store.state.currentUser) {
     console.warn("You require authentication, sorry!");
     next('/login');
-  // user logged in, but doesn't match the author needed to edit the page
-  // (ensures users can't spoof edit URLs), then show the recipes page
-  } else if (requiresAuth && requiresMatchup && store.state.currentUser) {
-    console.warn("You aren't the right user to be editing this page, sorry!");
-    next('/');
   } else {
     next();
   }

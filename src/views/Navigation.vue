@@ -33,7 +33,7 @@ export default {
     methods: {
         logout() {
             firebase.auth().signOut().then(() => {
-                store.commit("setCurrentUser", null);
+                this.$store.commit("setCurrentUser", null);
                 this.$router.replace('/login');
             })
         },

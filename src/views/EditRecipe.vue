@@ -83,13 +83,14 @@
 <script>
 import firebase from 'firebase';
 import { db } from '../main';
+import { util } from '../utility';
 
 export default {
     name: 'EditRecipe',
     data () {
         return {
             recipe: {
-                types: {}
+                types: {},
             }
         };
     },
@@ -130,7 +131,7 @@ export default {
             console.info("Finished updating recipe.");
             /* after the user updates the recipe, relocate them to the recipe page */
             this.$router.replace('/recipe/' + this.recipe.name.replace(/\s+/g, '-').toLowerCase());
-        },
+        }
     },
     computed: {
         totalTime: function() {
@@ -144,7 +145,18 @@ export default {
                 }
             };
             return returnArray.join(", ");
-        },
+        }
+    },
+    updated: function() {
+        if(util.stringMatch(this.$store.state.currentUser.email, this.recipe.author)) {
+            // we're cool, nothing to see here
+        }
+        else {
+            // what are you doing here if you aren't the author? not cool.
+            // return this jabroni to home.
+            console.warn("What are you doing here if you didn't make this recipe? Redirecting you to the recipe list.");
+            this.$router.replace('/');
+        }
     },
     firestore() {
         return {

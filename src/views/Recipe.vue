@@ -17,7 +17,7 @@
                 <li v-for="(instruction, idx) in recipe.instructions.split(/\n/)" :key="idx">{{instruction}}</li>
             </ol>
             <div class="mt-8" v-if="userMatchesAuthor">
-                <router-link :to="{ path: '/edit/' + recipe.name.replace(/\s+/g, '-').toLowerCase()}"><button class="button mr-8">Edit Recipe</button></router-link>
+                <router-link :to="{ path: editPath }"><button class="button mr-8">Edit Recipe</button></router-link>
                 <button @click="deleteRecipe" class="button bg-red">Delete Recipe</button>
             </div>
         </div>
@@ -28,6 +28,7 @@
 <script>
 import firebase from 'firebase';
 import { db } from '../main';
+import { util } from '../utility';
 
 export default {
     name: 'Recipe',
@@ -36,7 +37,7 @@ export default {
             recipe: {
                 instructions: "",
                 ingredients: ""
-            }
+            },
         };
     },
     methods: {
@@ -64,12 +65,14 @@ export default {
             };
             return returnArray.join(", ");
         },
-        userMatchesAuthor: function() {
-            console.log(this.recipe.author);
-            if(firebase.auth().currentUser.email === this.recipe.author) {
-                return true;
+        editPath: function() {
+            // this was causing an error to pop up, so make sure name is defined before replacing the path.
+            if(this.recipe.name !== undefined) {
+                return '/edit/' + this.recipe.name.replace(/\s+/g, '-').toLowerCase()
             }
-            return false;
+        },
+        userMatchesAuthor: function() {
+            return util.stringMatch(this.$store.state.currentUser.email, this.recipe.author);
         }
     },
     firestore() {

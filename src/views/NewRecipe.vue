@@ -139,9 +139,6 @@ export default {
       // Now reroute the user to the recipes page
       this.$router.replace('/');
     },
-    deleteRecipe (id) {
-      db.collection('recipes').doc(id).delete();
-    },
     logout () {
       firebase.auth().signOut().then(() => {
         this.$router.replace('/login');
